@@ -32,7 +32,7 @@ class ContainerInfo(object, IDescriptable):
         self.start_time = datetime.datetime.utcnow()
         self.container_id = IdGenerator.next_long()
 
-    def get_descritor(self):
+    def get_descriptor(self):
         return ContainerInfoDescriptor
 
     @staticmethod

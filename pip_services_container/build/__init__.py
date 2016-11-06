@@ -11,4 +11,4 @@
 
 __all__ = ['DefaultContainerFactory']
 
-from .DefaultContainerFactory
+from .DefaultContainerFactory import DefaultContainerFactory

@@ -15,6 +15,7 @@ from pip_services_commons.build import CompositeFactory
 from pip_services_commons.log import DefaultLoggerFactory
 from pip_services_commons.count import DefaultCountersFactory
 from pip_services_commons.cache import DefaultCacheFactory
+from ..info.ContainerInfoFactory import ContainerInfoFactory
 
 DefaultContainerFactoryDescriptor = Descriptor(
     "pip-services-container", "factory", "container", "1.0"
@@ -23,7 +24,8 @@ DefaultContainerFactoryDescriptor = Descriptor(
 class DefaultContainerFactory(CompositeFactory, IDescriptable):
 
     def __init__(self):
-        #self.add(ContainerInfoFactory())
+        super(DefaultContainerFactory, self).__init__()
+        self.add(ContainerInfoFactory())
         self.add(DefaultLoggerFactory())
         self.add(DefaultCountersFactory())
         self.add(DefaultCacheFactory())

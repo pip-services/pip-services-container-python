@@ -10,6 +10,9 @@
 """
 
 from pip_services_commons.errors import ConfigException
+from pip_services_commons.config import JsonConfigReader
+from pip_services_commons.config import YamlConfigReader
+from .ContainerConfig import ContainerConfig
 
 class ContainerConfigReader(object):
 
@@ -18,16 +21,16 @@ class ContainerConfigReader(object):
         if path == None:
             raise ConfigException(correlation_id, "NO_PATH", "Missing config file path")
         
-        index = path.find('.')
+        index = path.rfind('.')
         ext = path[index + 1:].lower() if index > 0 else ''
-        
+
         if ext == "json":
-            return read_from_json_file(correlation_id, path)
+            return ContainerConfigReader.read_from_json_file(correlation_id, path)
         elif ext == "yaml":
-            return read_from_yaml_file(correlation_id, path)
+            return ContainerConfigReader.read_from_yaml_file(correlation_id, path)
         
         # By default read as JSON
-        return read_from_json_file(correlation_id, path)
+        return ContainerConfigReader.read_from_json_file(correlation_id, path)
 
     @staticmethod
     def read_from_json_file(correlation_id, path):

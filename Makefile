@@ -17,6 +17,9 @@ install:
 test:
 	py.test test -s
 
+run:
+	python -m test.DummyProcess
+
 docgen:
 	rm -rf build/doc
 	sphinx-apidoc -f -e -o build/doc pip_services_container

@@ -9,9 +9,12 @@
     :license: MIT, see LICENSE for more details.
 """
 
+from pip_services_commons.config import ConfigParams
+from .ComponentConfig import ComponentConfig
+
 class ContainerConfig(list):
 
-    def __init__(self, components):
+    def __init__(self, components = None):
         if components != None:
             for component in components:
                 self.append(component)

@@ -9,5 +9,6 @@
     :license: MIT, see LICENSE for more details.
 """
 
-__all__ = []
+__all__ = [ 'ContainerReferenceSet' ]
 
+from .ContainerReferenceSet import ContainerReferenceSet

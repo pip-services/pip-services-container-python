@@ -9,5 +9,9 @@
     :license: MIT, see LICENSE for more details.
 """
 
-__all__ = []
+__all__ = [ 'ContainerInfo', 'ContainerInfoFactory' ]
+
+from .ContainerInfo import ContainerInfo
+from .ContainerInfoFactory import ContainerInfoFactory
+
 

@@ -1,0 +1,6 @@
+$VersionControl='git'
+$Package='none'
+$Build='python'
+$Test='pytest'
+$Deploy='none'
+$Run='none'

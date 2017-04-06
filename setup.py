@@ -3,7 +3,7 @@ Pip.Services Container
 ----------------------
 
 Pip.Services is an open-source library of basic microservices.
-IoC container implementation portable across variety of languages.
+pip_services_container package container IoC container implementation.
 
 Links
 `````
@@ -21,10 +21,10 @@ setup(
     version='1.0.0',
     url='http://github.com/pip-services/pip-services-container-python',
     license='MIT',
-    author='Digital Living Software Corp.',
+    author='Conceptual Vision Consulting LLC',
     description='IoC container for Pip.Services in Python',
     long_description=__doc__,
-    packages=find_packages(),
+    packages=find_packages(exclude=['config', 'data', 'test']),
     include_package_data=True,
     zip_safe=True,
     platforms='any',

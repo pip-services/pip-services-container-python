@@ -3,7 +3,7 @@ Pip.Services Container
 ----------------------
 
 Pip.Services is an open-source library of basic microservices.
-pip_services_container package container IoC container implementation.
+pip_services_container provides IoC container implementation.
 
 Links
 `````

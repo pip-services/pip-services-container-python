@@ -5,7 +5,7 @@
     
     Tests for container information
     
-    :copyright: Digital Living Software Corp. 2015-2016, see AUTHORS for more details.
+    :copyright: Conceptual Vision Consulting LLC 2015-2016, see AUTHORS for more details.
     :license: MIT, see LICENSE for more details.
 """
 
@@ -42,10 +42,10 @@ class TestContainerInfo(object):
         
     def test_from_config(self):
         config = ConfigParams.from_tuples(
-            "info.name", "new name",
-            "info.description", "new description",
-            "info.properties.access_key", "key",
-            "info.properties.store_key", "store key"
+            "name", "new name",
+            "description", "new description",
+            "properties.access_key", "key",
+            "properties.store_key", "store key"
         )
         container_info = ContainerInfo.from_config(config)
         assert container_info.name == "new name"

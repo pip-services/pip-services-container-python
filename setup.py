@@ -18,13 +18,13 @@ from setuptools import find_packages
 
 setup(
     name='pip_services_container',
-    version='1.0.0',
+    version='2.0.0',
     url='http://github.com/pip-services/pip-services-container-python',
     license='MIT',
     author='Conceptual Vision Consulting LLC',
     description='IoC container for Pip.Services in Python',
     long_description=__doc__,
-    packages=find_packages(exclude=['config', 'data', 'test']),
+    packages=find_packages(exclude=['config', 'data', 'examples', 'test']),
     include_package_data=True,
     zip_safe=True,
     platforms='any',

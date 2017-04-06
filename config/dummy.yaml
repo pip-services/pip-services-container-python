@@ -1,9 +1,12 @@
----
-- descriptor: "pip-services-commons:logger:console:*"
+- descriptor: "pip-services-container:container-info:default:default:1.0"
+  name: "pip-services-dummies"
+  description: "Sample dummy microservice"
+  
+- descriptor: "pip-services-commons:logger:console:*:*"
   level: "trace"
 
-- descriptor: "pip-services-dummies:controller:*:*"
+- descriptor: "pip-services-dummies:controller:*:*:*"
   message: "Hello from dummy controller #1"
 
-- type: "DummyController,test.DummyController"
+- type: "DummyController,examples.DummyController"
   message: "Hello from dummy controller #2"

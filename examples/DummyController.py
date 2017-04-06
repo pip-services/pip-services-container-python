@@ -5,7 +5,7 @@
     
     Dummy controller implementation
     
-    :copyright: Digital Living Software Corp. 2015-2016, see AUTHORS for more details.
+    :copyright: Conceptual Vision Consulting LLC 2015-2016, see AUTHORS for more details.
     :license: MIT, see LICENSE for more details.
 """
 
@@ -17,7 +17,7 @@ from pip_services_commons.run import INotifiable
 from pip_services_commons.run import FixedRateTimer
 from pip_services_commons.log import CompositeLogger
 
-class DummyController(object, IReferenceable, IReconfigurable, IOpenable, IClosable, INotifiable):
+class DummyController(object, IReferenceable, IReconfigurable, IOpenable, INotifiable):
     _timer = None
     _logger = None
     _message = None
@@ -34,6 +34,9 @@ class DummyController(object, IReferenceable, IReconfigurable, IOpenable, IClosa
 
     def set_references(self, references):
         self._logger.set_references(references)
+
+    def is_opened(self):
+        return self._timer.is_started()
 
     def open(self, correlation_id):
         self._timer.start()

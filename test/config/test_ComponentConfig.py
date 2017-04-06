@@ -5,7 +5,7 @@
     
     Tests for component configuration
     
-    :copyright: Digital Living Software Corp. 2015-2016, see AUTHORS for more details.
+    :copyright: Conceptual Vision Consulting LLC 2015-2016, see AUTHORS for more details.
     :license: MIT, see LICENSE for more details.
 """
 
@@ -29,7 +29,7 @@ class TestComponentConfig:
         component_config = ComponentConfig()
         assert None == component_config.descriptor
         
-        descriptor = Descriptor("group", "type", "id", "version")
+        descriptor = Descriptor("group", "type", "kind", "name", "version")
         component_config.descriptor = descriptor
         assert component_config.descriptor == descriptor
 
@@ -38,9 +38,9 @@ class TestComponentConfig:
         assert None == component_config.descriptor
         
         config = ConfigParams.from_tuples(
-                "config.key", "key",
-                "config.key2", "key2"
-            )
+            "config.key", "key",
+            "config.key2", "key2"
+        )
         component_config.config = config
         assert component_config.config == config
 
@@ -62,14 +62,14 @@ class TestComponentConfig:
         except ConfigException as e:
             assert e.message == "Descriptor descriptor_name is in wrong format"
         
-        descriptor = Descriptor("group", "type", "id", "version")
-        typ = TypeDescriptor("type", None)
+        descriptor = Descriptor("group", "type", "kind", "name", "version")
+        tipe = TypeDescriptor("type", None)
         config = ConfigParams.from_tuples(
-            "descriptor", "group:type:id:version",
+            "descriptor", "group:type:kind:name:version",
             "type", "type",
             "config.key", "key",
             "config.key2", "key2"
         )
         component_config = ComponentConfig.from_config(config)
         assert component_config.descriptor == descriptor
-        assert component_config.type == typ
+        assert component_config.type == tipe

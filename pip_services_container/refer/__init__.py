@@ -5,10 +5,16 @@
     
     Container refer module initialization
     
-    :copyright: Digital Living Software Corp. 2015-2016, see AUTHORS for more details.
+    :copyright: Conceptual Vision Consulting LLC 2015-2016, see AUTHORS for more details.
     :license: MIT, see LICENSE for more details.
 """
 
-__all__ = [ 'ContainerReferenceSet' ]
+__all__ = [ 'ReferencesDecorator', 'RunReferencesDecorator', 'LinkReferencesDecorator',
+    'BuildReferencesDecorator', 'ManagedReferences', 'ContainerReferences' ]
 
-from .ContainerReferenceSet import ContainerReferenceSet
+from .ReferencesDecorator import ReferencesDecorator
+from .RunReferencesDecorator import RunReferencesDecorator
+from .LinkReferencesDecorator import LinkReferencesDecorator
+from .BuildReferencesDecorator import BuildReferencesDecorator
+from .ManagedReferences import ManagedReferences
+from .ContainerReferences import ContainerReferences

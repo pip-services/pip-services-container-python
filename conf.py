@@ -52,8 +52,8 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'Pip.Services Container for Python'
-copyright = u'2016, Digital Living Software Corp.'
-author = u'Digital Living Software Corp.'
+copyright = u'2016, Conceptual Vision Consulting LLC'
+author = u'Conceptual Vision Consulting LLC'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -263,7 +263,7 @@ latex_elements = {
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
     (master_doc, 'PipServicesContainerforPython.tex', u'Pip.Services Container for Python Documentation',
-     u'Digital Living Software Corp.', 'manual'),
+     u'Conceptual Vision Consulting LLC', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of

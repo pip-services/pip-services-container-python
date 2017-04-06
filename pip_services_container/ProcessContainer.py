@@ -5,7 +5,7 @@
     
     Process container implementation
     
-    :copyright: Digital Living Software Corp. 2015-2016, see AUTHORS for more details.
+    :copyright: Conceptual Vision Consulting LLC 2015-2016, see AUTHORS for more details.
     :license: MIT, see LICENSE for more details.
 """
 
@@ -14,6 +14,7 @@ import signal
 import time
 import threading
 
+from pip_services_commons.log import ConsoleLogger
 from .Container import Container
 
 class ProcessContainer(Container):
@@ -21,9 +22,10 @@ class ProcessContainer(Container):
 
     def __init__(self):
         super(ProcessContainer, self).__init__()
+        self._logger = ConsoleLogger()
         self._exit_event = threading.Event()
 
-    def read_config_from_args(self, correlation_id, default_path):
+    def read_config_from_args_or_file(self, correlation_id, default_path):
         args = sys.argv
         config_path = args[1] if len(args) > 1 else default_path
         self.read_config_from_file(correlation_id, config_path)
@@ -69,6 +71,6 @@ class ProcessContainer(Container):
         self.read_config_from_file(correlation_id, path)
         self.run(correlation_id)
 
-    def run_with_config_from_args(self, correlation_id, default_path):
-        self.read_config_from_args(correlation_id, default_path)
+    def run_with_config_from_args_or_file(self, correlation_id, default_path):
+        self.read_config_from_args_or_file(correlation_id, default_path)
         self.run(correlation_id)

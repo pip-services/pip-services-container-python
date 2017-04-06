@@ -8,5 +8,6 @@
     "python.unitTest.pyTestArgs": [
         "--exitfirst",
         "--verbose"
-    ]
+    ],
+    "python.linting.pylintEnabled": false
 }

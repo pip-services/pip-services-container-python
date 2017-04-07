@@ -29,7 +29,7 @@ setup(
     zip_safe=True,
     platforms='any',
     install_requires=[
-        'iso8601', 'PyYAML'
+        'iso8601', 'PyYAML', 'pip_services_commons'
     ],
     classifiers=[
         'Development Status :: 4 - Beta',

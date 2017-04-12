@@ -26,6 +26,7 @@ from pip_services_commons.run import Closer
 from .build.DefaultContainerFactory import DefaultContainerFactory
 from .build.DefaultContainerFactory import DefaultContainerFactoryDescriptor
 from .info.ContainerInfo import ContainerInfo
+from .info.ContainerInfoFactory import ContainerInfoDescriptor
 from .config.ContainerConfigReader import ContainerConfigReader
 from .refer.ContainerReferences import ContainerReferences
 
@@ -33,12 +34,13 @@ class Container(object, IConfigurable, IReferenceable, IUnreferenceable, IOpenab
     _logger = None
     _info = None
     _config = None
+    _factories = None
     _references = None
 
-    def __init__(self, config = None):
+    def __init__(self, name = None, description = None):
         self._logger = NullLogger()
-        self._info = ContainerInfo()
-        self._config = config
+        self._info = ContainerInfo(name, description)
+        self._factories = DefaultContainerFactory()
 
     def configure(self, config):
         self._config = ContainerConfig.from_config(config)
@@ -54,7 +56,8 @@ class Container(object, IConfigurable, IReferenceable, IUnreferenceable, IOpenab
         
     def _init_references(self, references):
         # Override in base classes
-        references.put(DefaultContainerFactoryDescriptor, DefaultContainerFactory())
+        references.put(DefaultContainerFactoryDescriptor, self._factories)
+        references.put(ContainerInfoDescriptor, self._info)
 
     def is_opened(self):
         return self._references != None
@@ -72,16 +75,15 @@ class Container(object, IConfigurable, IReferenceable, IUnreferenceable, IOpenab
             self._references.put_from_config(self._config)
             self.set_references(self._references)
 
+            # Get custom description if available
+            info_descriptor = Descriptor("*", "container-info", "*", "*", "*")
+            self._info = self._references.get_one_optional(info_descriptor)
+
             # Reference and open components
             self._references.open(correlation_id)
 
             # Get reference to logger
             self._logger = CompositeLogger(self._references)
-            
-            # Get reference to container info
-            info_descriptor = Descriptor("*", "container-info", "*", "*", "*")
-            self._info = self._references.get_one_required(info_descriptor)
-
             self._logger.info(correlation_id, "Container " + self._info.name + " started.")
         except Exception as ex:
             self._logger.error(correlation_id, ex, "Failed to start container")

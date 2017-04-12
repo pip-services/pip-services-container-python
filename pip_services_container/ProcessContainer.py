@@ -20,14 +20,15 @@ from pip_services_commons.config import ConfigParams
 from .Container import Container
 
 class ProcessContainer(Container):
+    _config_path = './config/config.yaml'
     _exit_event = None
 
-    def __init__(self):
-        super(ProcessContainer, self).__init__()
+    def __init__(self, name = None, description = None):
+        super(ProcessContainer, self).__init__(name, description)
         self._logger = ConsoleLogger()
         self._exit_event = threading.Event()
 
-    def _get_config_path(self, default_path):
+    def _get_config_path(self):
         args = sys.argv
         index = 0
         while index < len(args):
@@ -38,7 +39,7 @@ class ProcessContainer(Container):
                 if arg == "--config" or arg == "-c":
                     return next_arg
             index += 1
-        return default_path
+        return self._config_path
 
     def _get_parameters(self):
         # Process command line parameters
@@ -109,27 +110,17 @@ class ProcessContainer(Container):
             except:
                 pass # Do nothing...
 
-    def run(self, correlation_id):
-        self._capture_errors(correlation_id)
-        self.open(correlation_id)
-        self._capture_exit(correlation_id)
-        self.close(correlation_id)
-
-    def run_with_config(self, correlation_id, config):
-        self.set_config(config)
-        self.run(correlation_id)
-
-    def run_with_config_file(self, correlation_id, path):
-        self.read_config_from_file(correlation_id, path)
-        self.run(correlation_id)
-
-    def run_with_config_from_args_or_file(self, correlation_id, default_path):
+    def run(self):
         if self._show_help():
             self._print_help()
             return
 
-        path = self._get_config_path(default_path)
+        correlation_id = self._info.name
+        path = self._get_config_path()
         parameters = self._get_parameters()
         self.read_config_from_file(correlation_id, path, parameters)
 
-        self.run(correlation_id)
+        self._capture_errors(correlation_id)
+        self.open(correlation_id)
+        self._capture_exit(correlation_id)
+        self.close(correlation_id)

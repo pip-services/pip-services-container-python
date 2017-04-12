@@ -23,8 +23,9 @@ class ContainerInfo(object, IReconfigurable):
     start_time = None
     properties = None
 
-    def __init__(self):
-        self.name = "unknown"
+    def __init__(self, name = None, description = None):
+        self.name = name if name != None else "unknown"
+        self.description = description
         self.start_time = datetime.datetime.utcnow()
         self.container_id = IdGenerator.next_long()
 

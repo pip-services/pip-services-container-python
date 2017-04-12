@@ -111,9 +111,9 @@ class ProcessContainer(Container):
 
     def run(self, correlation_id):
         self._capture_errors(correlation_id)
-        self.start(correlation_id)
+        self.open(correlation_id)
         self._capture_exit(correlation_id)
-        self.stop(correlation_id)
+        self.close(correlation_id)
 
     def run_with_config(self, correlation_id, config):
         self.set_config(config)

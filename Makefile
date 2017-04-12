@@ -18,7 +18,7 @@ test:
 	py.test test -s
 
 run:
-	python -m test.DummyProcess
+	python -m examples.DummyProcess
 
 docgen:
 	rm -rf build/doc

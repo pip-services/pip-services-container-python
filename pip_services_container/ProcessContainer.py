@@ -9,12 +9,14 @@
     :license: MIT, see LICENSE for more details.
 """
 
+import os
 import sys
 import signal
 import time
 import threading
 
 from pip_services_commons.log import ConsoleLogger
+from pip_services_commons.config import ConfigParams
 from .Container import Container
 
 class ProcessContainer(Container):
@@ -25,10 +27,60 @@ class ProcessContainer(Container):
         self._logger = ConsoleLogger()
         self._exit_event = threading.Event()
 
-    def read_config_from_args_or_file(self, correlation_id, default_path):
+    def _get_config_path(self, default_path):
         args = sys.argv
-        config_path = args[1] if len(args) > 1 else default_path
-        self.read_config_from_file(correlation_id, config_path)
+        index = 0
+        while index < len(args):
+            arg = args[index]
+            next_arg = args[index + 1] if index < len(args) - 1 else None
+            next_arg = None if next_arg != None and next_arg.startswith('-') else next_arg;
+            if next_arg != None:
+                if arg == "--config" or arg == "-c":
+                    return next_arg
+            index += 1
+        return default_path
+
+    def _get_parameters(self):
+        # Process command line parameters
+        args = sys.argv
+        line = ''
+        index = 0
+        while index < len(args):
+            arg = args[index]
+            next_arg = args[index + 1] if index < len(args) - 1 else None
+            next_arg = None if next_arg != None and next_arg.startswith('-') else next_arg;
+            if next_arg != None:
+                if arg == "--param" or arg == "--params" or arg == "-p":
+                    if len(line) > 0:
+                        line = line + ';'
+                    line = line + next_arg
+                    index += 1
+            index += 1
+
+        parameters = ConfigParams.from_string(line)
+
+        # Process environmental variables
+        for (k, v) in os.environ.items():
+            parameters[k] = v
+
+        return parameters
+
+
+    def _show_help(self):
+        args = sys.argv
+        index = 0
+        while index < len(args):
+            arg = args[index]
+            if arg == "--help" or arg == "-h":
+                return True
+            index += 1
+        return False
+
+
+    def _print_help():
+        print("Pip.Services process container - http://www.github.com/pip-services/pip-services")
+        print("run [-h] [-c <config file>] [-p <param>=<value>]*")
+
 
     def _capture_errors(self, correlation_id):
         def handle_exception(exc_type, exc_value, exc_traceback):
@@ -72,5 +124,12 @@ class ProcessContainer(Container):
         self.run(correlation_id)
 
     def run_with_config_from_args_or_file(self, correlation_id, default_path):
-        self.read_config_from_args_or_file(correlation_id, default_path)
+        if self._show_help():
+            self._print_help()
+            return
+
+        path = self._get_config_path(default_path)
+        parameters = self._get_parameters()
+        self.read_config_from_file(correlation_id, path, parameters)
+
         self.run(correlation_id)

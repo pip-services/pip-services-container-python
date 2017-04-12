@@ -55,8 +55,8 @@ class Container(object):
     def set_references(self, references):
         self._references = references
 
-    def read_config_from_file(self, correlation_id, path):
-        self._config = ContainerConfigReader.read_from_file(correlation_id, path)
+    def read_config_from_file(self, correlation_id, path, parameters):
+        self._config = ContainerConfigReader.read_from_file(correlation_id, path, parameters)
         
     def _init_references(self, references):
         # Override in base classes

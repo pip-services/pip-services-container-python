@@ -6,4 +6,6 @@ $Test='pytest'
 $TestInclude='./test/'
 
 $Deploy='none'
-$Run='none'
+$Run='process'
+$RunProcessCommand='python'
+$RunProcessArguments=['-m', 'examples.app']

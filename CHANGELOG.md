@@ -1,5 +1,11 @@
 # IoC container for Pip.Services in Python Changelog
 
+## <a name="2.1.0"></a> 2.1.0 (2017-04-11)
+
+### Bug Fixes
+* **config** Added parameterization
+* ProcessContainer now supports command line parameters
+
 ## <a name="2.0.0"></a> 2.0.0 (2017-04-05)
 
 ### Features

@@ -6,7 +6,7 @@
   level: "trace"
 
 - descriptor: "pip-services-dummies:controller:*:*:*"
-  message: "Hello from dummy controller #1"
+  message: "Hello {{ USER }} from dummy controller #1"
 
 - type: "DummyController,examples.DummyController"
-  message: "Hello from dummy controller #2"
+  message: "Hello {{ USER }} from dummy controller #2"

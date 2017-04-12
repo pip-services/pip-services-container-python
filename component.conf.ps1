@@ -7,5 +7,5 @@ $TestInclude='./test/'
 
 $Deploy='none'
 $Run='process'
-$RunProcessCommand='python'
-$RunProcessArguments=['-m', 'examples.app']
+$RunStartCommand='python'
+$RunStartArguments=@('-m', 'examples.app')

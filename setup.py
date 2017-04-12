@@ -22,6 +22,7 @@ setup(
     url='http://github.com/pip-services/pip-services-container-python',
     license='MIT',
     author='Conceptual Vision Consulting LLC',
+    author_email='seroukhov@gmail.com',
     description='IoC container for Pip.Services in Python',
     long_description=__doc__,
     packages=find_packages(exclude=['config', 'data', 'examples', 'test']),

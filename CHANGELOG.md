@@ -1,5 +1,15 @@
 # IoC container for Pip.Services in Python Changelog
 
+## <a name="2.2.0"></a> 2.2.0 (2017-04-20)
+
+### Features
+* Migrated to pip-services-commons 2.4
+* Added Container class
+* Implemented IOpenable interface in ManagedReferences
+
+### Bug Fixes
+* Fixed except when closing container that hasn't been opened
+
 ## <a name="2.1.1"></a> 2.1.1 (2017-04-12)
 
 ### Features

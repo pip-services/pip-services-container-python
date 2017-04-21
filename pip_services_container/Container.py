@@ -92,7 +92,7 @@ class Container(object, IConfigurable, IReferenceable, IUnreferenceable, IOpenab
 
     def close(self, correlation_id):
         if self._references == None:
-            raise InvalidStateException(correlation_id, "NOT_STARTED", "Container was not started")
+            return;
                 
         try:
             self._logger.trace(correlation_id, "Stopping " + self._info.name + " container")

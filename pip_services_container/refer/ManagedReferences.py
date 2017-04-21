@@ -37,18 +37,15 @@ class ManagedReferences(ReferencesDecorator, IOpenable):
         self.base_references = self._runner
 
     def is_opened(self):
-        components = self.get_all()
-        return Opener.is_opened(components)
+        return self._linker.is_opened() and self._runner.is_opened()
 
     def open(self, correlation_id):
-        components = self.get_all()
-        Referencer.set_references(self, components)
-        Opener.open(correlation_id, components)
+        self._linker.open(correlation_id)
+        self._runner.open(correlation_id)
 
     def close(self, correlation_id):
-        components = self.get_all()
-        Closer.close(correlation_id, components)
-        Referencer.unset_references(components)
+        self._runner.open(correlation_id)
+        self._linker.open(correlation_id)
 
     @staticmethod
     def from_tuples(*tuples):

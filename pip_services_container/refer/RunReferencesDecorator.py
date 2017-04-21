@@ -10,7 +10,6 @@
 """
 
 from pip_services_commons.refer import IReferences
-from pip_services_commons.refer import ReferenceQuery
 from pip_services_commons.run import Opener
 from pip_services_commons.run import Closer
 

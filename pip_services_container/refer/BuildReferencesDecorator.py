@@ -17,7 +17,6 @@ from pip_services_commons.build import IFactory
 from .ReferencesDecorator import ReferencesDecorator
 
 class BuildReferencesDecorator(ReferencesDecorator):
-    build_enabled = True
 
     def __init__(self, base_references, parent_references):
         super(BuildReferencesDecorator, self).__init__(base_references, parent_references)
@@ -67,12 +66,11 @@ class BuildReferencesDecorator(ReferencesDecorator):
         )
 
 
-    def find(self, query, required):
-        components = super(BuildReferencesDecorator, self).find(query, False)
-        locator = query.locator
+    def find(self, locator, required):
+        components = super(BuildReferencesDecorator, self).find(locator, False)
 
         # Try to create component
-        if len(components) == 0 and self.build_enabled:
+        if len(components) == 0:
             factory = self.find_factory(locator)
             component = self.create(locator, factory)
             if component != None:

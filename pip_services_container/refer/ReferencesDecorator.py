@@ -10,7 +10,6 @@
 """
 
 from pip_services_commons.refer import IReferences
-from pip_services_commons.refer import ReferenceQuery
 
 class ReferencesDecorator(object, IReferences):
     base_references = None
@@ -35,23 +34,23 @@ class ReferencesDecorator(object, IReferences):
         
     def get_one_optional(self, locator):
         try:
-            components = self.find(ReferenceQuery(locator), False)
+            components = self.find(locator, False)
             return components[0] if len(components) > 0 else None
         except Exception as ex:
             return None
 
     def get_one_required(self, locator):
-        components = self.find(ReferenceQuery(locator), True)
+        components = self.find(locator, True)
         return components[0] if len(components) > 0 else None
 
     def get_optional(self, locator):
         try:
-            return self.find(ReferenceQuery(locator), False)
+            return self.find(locator, False)
         except Exception as ex:
             return []
 
     def get_required(self, locator):
-        return self.find(ReferenceQuery(locator), True)
+        return self.find(locator, True)
 
-    def find(self, query, required):
-        return self.base_references.find(query, required)
+    def find(self, locator, required):
+        return self.base_references.find(locator, required)

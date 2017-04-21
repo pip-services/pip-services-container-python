@@ -9,8 +9,9 @@
     :license: MIT, see LICENSE for more details.
 """
 
-__all__ = [ 'Container', 'ProcessContainer' ]
+__all__ = [ 'Component', 'Container', 'ProcessContainer' ]
 
+from .Component import Component
 from .Container import Container
 from .ProcessContainer import ProcessContainer
 
